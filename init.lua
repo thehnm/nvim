@@ -1,0 +1,5 @@
+require("bootstrap")
+require("config")
+require("keymaps")
+require("init-lazy")
+require("autocmd")
