@@ -55,25 +55,41 @@ local config = function()
         capabilities = capabilities,
         filetypes = {
             "typescript",
+            "typescriptreact",
         },
         root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git"),
     })
 
-    -- html, typescriptreact, javascriptreact, css, sass, scss, less, svelte, vue
+    lspconfig.svelte.setup({
+        on_attach = on_attach,
+        capabilities = capabilities,
+        filetypes = {
+            "svelte",
+        },
+    })
+
+    -- html, javascriptreact, css, sass, scss, less, vue
     lspconfig.emmet_ls.setup({
         capabilities = capabilities,
         on_attach = on_attach,
         filetypes = {
             "html",
-            "typescriptreact",
             "javascriptreact",
             "javascript",
             "css",
             "sass",
             "scss",
             "less",
-            "svelte",
             "vue",
+        },
+    })
+
+    -- markdown
+    lspconfig.marksman.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+        filetypes = {
+            "markdown",
         },
     })
 
@@ -84,6 +100,7 @@ local config = function()
     local eslint_d = require("efmls-configs.linters.eslint_d")
     local prettierd = require("efmls-configs.formatters.prettier_d")
     local fixjson = require("efmls-configs.formatters.fixjson")
+    local markdownlint = require("efmls-configs.linters.markdownlint")
 
     -- configure efm server
     lspconfig.efm.setup({
@@ -99,6 +116,7 @@ local config = function()
             "typescriptreact",
             "svelte",
             "vue",
+            "markdown",
         },
         init_options = {
             documentFormatting = true,
@@ -120,6 +138,7 @@ local config = function()
                 typescriptreact = { eslint_d, prettierd },
                 svelte = { eslint_d, prettierd },
                 vue = { eslint_d, prettierd },
+                markdown = { markdownlint, prettierd },
             },
         },
     })
