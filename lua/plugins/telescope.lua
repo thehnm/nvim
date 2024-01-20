@@ -37,9 +37,10 @@ return {
     config = config,
     keys = {
         mapkeyret("<leader>fk", "Telescope keymaps", "Show keymaps"),
-        mapkeyret("<leader>fh", "Telescope help_tags", "Show helptags"),
+        mapkeyret("<leader>fh", "Telescope help_tags", "Show help tags"),
         mapkeyret("<leader>ff", "Telescope find_files", "Find file"),
         mapkeyret("<leader>fg", "Telescope live_grep", "Live grep"),
         mapkeyret("<leader>fb", "Telescope buffers", "Find buffer"),
+        mapkeyret("<leader>fs", "Telescope lsp_document_symbols", "Show LSP symbols"),
     },
 }
