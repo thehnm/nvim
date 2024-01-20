@@ -51,7 +51,20 @@ function M.DiagnosticsStatus()
     if errors == 0 and warnings == 0 and infos == 0 and hints == 0 then
         return ""
     else
-        return string.format("E:%d W:%d I:%d H:%d", errors, warnings, infos, hints)
+        local non_zero_strings = {}
+        if errors ~= 0 then
+            table.insert(non_zero_strings, string.format("E:%d", errors))
+        end
+        if warnings ~= 0 then
+            table.insert(non_zero_strings, string.format("W:%d", warnings))
+        end
+        if infos ~= 0 then
+            table.insert(non_zero_strings, string.format("I:%d", infos))
+        end
+        if hints ~= 0 then
+            table.insert(non_zero_strings, string.format("H:%d", hints))
+        end
+        return table.concat(non_zero_strings, " ")
     end
 end
 
