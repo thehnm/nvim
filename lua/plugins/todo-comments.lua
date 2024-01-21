@@ -7,6 +7,8 @@ return {
     opts = {},
     config = function()
         require("todo-comments").setup()
-        mapkeyret("<leader>tt", ":TodoTelescope", "Show TODOs in project")
     end,
+    keys = {
+        mapkeyret("<leader>tt", ":TodoTelescope", "Show TODOs in project"),
+    },
 }
