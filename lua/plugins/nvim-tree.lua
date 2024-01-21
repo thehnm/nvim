@@ -1,3 +1,5 @@
+local mapkeyret = require("utils.mapkey").mapkeyret
+
 return {
     "nvim-tree/nvim-tree.lua",
     lazy = false,
@@ -27,4 +29,8 @@ return {
         })
     end,
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    keys = {
+        mapkeyret("<leader>bf", "NvimTreeFocus", "Focus on filetree"),
+        mapkeyret("<leader>bt", "NvimTreeToggle", "Toggle filetree"),
+    },
 }
