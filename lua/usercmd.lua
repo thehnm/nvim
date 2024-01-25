@@ -1,34 +1,55 @@
 local M = {}
 
 function M.ExecuteShellCommandInBuffer()
-    local command = vim.fn.input("Enter: ")
-    if command == "" then
+    local cmd = vim.fn.input("Enter: ")
+    if cmd == "" then
         return
     end
 
-    local command_with_stderr = command .. " 2>&1"
-    local handle = io.popen(command_with_stderr, "r")
-    if handle == nil then
-        print("Failed to execute command")
-        return
+    local bufnr = vim.api.nvim_create_buf(false, true)
+    vim.api.nvim_buf_set_option(bufnr, "buftype", "nofile")
+    vim.api.nvim_buf_set_option(bufnr, "bufhidden", "hide")
+    vim.api.nvim_buf_set_option(bufnr, "swapfile", false)
+    vim.api.nvim_buf_set_option(bufnr, "modifiable", true)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "q", ":bd!<CR>", { noremap = true, silent = true })
+
+    vim.cmd("split")
+
+    vim.api.nvim_win_set_buf(0, bufnr)
+
+    local function onread(err, data)
+        if err then
+            print("Error:", err)
+        elseif data then
+            vim.schedule(function()
+                data = data:gsub("^%s+", ""):gsub("%s+$", "")
+                if #data > 0 then
+                    local lines = vim.split(data, "\n")
+                    vim.api.nvim_buf_set_lines(bufnr, -1, -1, false, lines)
+                end
+            end)
+        end
     end
-    local command_output = handle:read("*a")
-    handle:close()
 
-    vim.api.nvim_command("new")
+    local stdout = vim.loop.new_pipe(false)
+    local stderr = vim.loop.new_pipe(false)
+    local handle
+    handle = vim.loop.spawn("sh", {
+        args = { "-c", cmd },
+        stdio = { nil, stdout, stderr },
+    }, function(code, signal)
+        stdout:read_stop()
+        stderr:read_stop()
+        stdout:close()
+        stderr:close()
+        handle:close()
+        vim.schedule(function()
+            vim.api.nvim_buf_set_option(bufnr, "modifiable", false)
+        end)
+    end)
 
-    vim.api.nvim_buf_set_name(0, "Shell Command Output")
-
-    vim.api.nvim_buf_set_lines(0, 0, -1, false, vim.split(command_output, "\n"))
-
-    vim.api.nvim_buf_set_option(0, "buftype", "nofile")
-    vim.api.nvim_buf_set_option(0, "bufhidden", "wipe")
-    vim.api.nvim_buf_set_option(0, "swapfile", false)
-
-    vim.api.nvim_buf_set_keymap(0, "n", "q", "<cmd>bd!<CR>", { noremap = true, silent = true })
-
-    vim.cmd('echo ""')
-    vim.cmd("redraw")
+    vim.loop.read_start(stdout, onread)
+    vim.loop.read_start(stderr, onread)
 end
 
 function M.DiagnosticsStatus()
