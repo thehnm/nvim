@@ -19,6 +19,8 @@ M.on_attach = function(client, bufnr)
     if client.name == "pyright" then
         mapkeyret("<Leader>oi", "PyrightOrganizeImports", "Organize imports", "n", opts)
     end
+
+    client.server_capabilities.semanticTokensProvider = nil
 end
 
 return M
