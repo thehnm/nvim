@@ -4,7 +4,7 @@ local opts = {
     },
     install = {
         missing = true,
-        colorscheme = { "nord" },
+        colorscheme = { "poimandres" },
     },
     rtp = {
         disabled_plugins = {
