@@ -99,7 +99,6 @@ local config = function()
     local black = require("efmls-configs.formatters.black")
     local eslint_d = require("efmls-configs.linters.eslint_d")
     local prettierd = require("efmls-configs.formatters.prettier_d")
-    local fixjson = require("efmls-configs.formatters.fixjson")
     local markdownlint = require("efmls-configs.linters.markdownlint")
 
     -- configure efm server
@@ -117,6 +116,7 @@ local config = function()
             "svelte",
             "vue",
             "markdown",
+            "html",
         },
         init_options = {
             documentFormatting = true,
@@ -131,14 +131,15 @@ local config = function()
                 lua = { luacheck, stylua },
                 python = { flake8, black },
                 typescript = { eslint_d, prettierd },
-                json = { eslint_d, fixjson },
-                jsonc = { eslint_d, fixjson },
+                json = { eslint_d, prettierd },
+                jsonc = { eslint_d, prettierd },
                 javascript = { eslint_d, prettierd },
                 javascriptreact = { eslint_d, prettierd },
                 typescriptreact = { eslint_d, prettierd },
                 svelte = { eslint_d, prettierd },
                 vue = { eslint_d, prettierd },
                 markdown = { markdownlint, prettierd },
+                html = { nil, prettierd },
             },
         },
     })
