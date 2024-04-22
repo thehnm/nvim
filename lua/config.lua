@@ -36,3 +36,7 @@ local new_hl = vim.tbl_extend("force", old_hl, { italic = true })
 vim.api.nvim_set_hl(0, "Comment", new_hl)
 
 vim.opt.fillchars:append({ vert = " " })
+
+vim.opt.title = true
+vim.opt.titlelen = 0 -- do not shorten title
+vim.opt.titlestring = 'nvim %{expand("%:p")}'
