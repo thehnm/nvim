@@ -84,15 +84,6 @@ local config = function()
         },
     })
 
-    -- markdown
-    lspconfig.marksman.setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-        filetypes = {
-            "markdown",
-        },
-    })
-
     -- latex
     lspconfig.texlab.setup({
         capabilities = capabilities,
@@ -104,13 +95,23 @@ local config = function()
         },
     })
 
+    -- go
+    lspconfig.gopls.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+        filetypes = {
+            "go",
+        },
+    })
+
     local luacheck = require("efmls-configs.linters.luacheck")
     local stylua = require("efmls-configs.formatters.stylua")
     local flake8 = require("efmls-configs.linters.flake8")
     local black = require("efmls-configs.formatters.black")
     local eslint_d = require("efmls-configs.linters.eslint_d")
     local prettierd = require("efmls-configs.formatters.prettier_d")
-    local markdownlint = require("efmls-configs.linters.markdownlint")
+    local golangcilint = require("efmls-configs.linters.golangci_lint")
+    local goimports = require("efmls-configs.formatters.goimports")
 
     -- configure efm server
     lspconfig.efm.setup({
@@ -128,6 +129,7 @@ local config = function()
             "vue",
             "markdown",
             "html",
+            "go",
         },
         init_options = {
             documentFormatting = true,
@@ -149,8 +151,9 @@ local config = function()
                 typescriptreact = { eslint_d, prettierd },
                 svelte = { eslint_d, prettierd },
                 vue = { eslint_d, prettierd },
-                markdown = { markdownlint, prettierd },
+                markdown = { prettierd, prettierd },
                 html = { nil, prettierd },
+                go = { golangcilint, goimports },
             },
         },
     })
