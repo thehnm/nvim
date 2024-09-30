@@ -1,7 +1,7 @@
 local opts = {
     ensure_installed = {
         "efm",
-        "tsserver",
+        "ts_ls",
         "tailwindcss",
         "pyright",
         "lua_ls",

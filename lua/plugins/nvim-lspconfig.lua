@@ -50,7 +50,7 @@ local config = function()
     })
 
     -- typescript
-    lspconfig.tsserver.setup({
+    lspconfig.ts_ls.setup({
         on_attach = on_attach,
         capabilities = capabilities,
         filetypes = {
