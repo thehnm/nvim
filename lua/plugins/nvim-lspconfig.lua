@@ -54,6 +54,8 @@ local config = function()
         on_attach = on_attach,
         capabilities = capabilities,
         filetypes = {
+            "javascript",
+            "javascriptreact",
             "typescript",
             "typescriptreact",
         },
@@ -74,8 +76,6 @@ local config = function()
         on_attach = on_attach,
         filetypes = {
             "html",
-            "javascriptreact",
-            "javascript",
             "css",
             "sass",
             "scss",
