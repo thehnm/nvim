@@ -151,7 +151,7 @@ local config = function()
                 typescriptreact = { eslint_d, prettierd },
                 svelte = { eslint_d, prettierd },
                 vue = { eslint_d, prettierd },
-                markdown = { prettierd, prettierd },
+                markdown = { prettierd, nil },
                 html = { nil, prettierd },
                 go = { golangcilint, goimports },
             },
