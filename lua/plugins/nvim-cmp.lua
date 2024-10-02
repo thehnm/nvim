@@ -56,6 +56,15 @@ return {
                     ellipsis_char = "...",
                 }),
             },
+            window = {
+                completion = {
+                    border = "rounded",
+                    scrollbar = "║",
+                },
+                documentation = {
+                    border = "rounded",
+                },
+            },
         })
     end,
     dependencies = {
