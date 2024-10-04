@@ -101,6 +101,7 @@ local config = function()
         on_attach = on_attach,
         filetypes = {
             "go",
+            "gomod",
         },
     })
 
@@ -130,6 +131,7 @@ local config = function()
             "markdown",
             "html",
             "go",
+            "css",
         },
         init_options = {
             documentFormatting = true,
@@ -154,6 +156,7 @@ local config = function()
                 markdown = { prettierd, nil },
                 html = { nil, prettierd },
                 go = { golangcilint, goimports },
+                css = { eslint_d, prettierd },
             },
         },
     })
