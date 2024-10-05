@@ -30,11 +30,6 @@ vim.opt.smartcase = true -- but make it case sensitive if an uppercase is entere
 
 vim.o.statusline = "%<%f %h%m%r%=%{luaeval('require(\"usercmd\").DiagnosticsStatus()')} %l,%c %P"
 
--- Enable italic font only in comments
-local old_hl = vim.api.nvim_get_hl_by_name("Comment", true)
-local new_hl = vim.tbl_extend("force", old_hl, { italic = true })
-vim.api.nvim_set_hl(0, "Comment", new_hl)
-
 vim.opt.fillchars:append({ vert = " " })
 
 vim.opt.title = true
