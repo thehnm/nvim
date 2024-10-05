@@ -7,10 +7,10 @@ function M.ExecuteShellCommandInBuffer()
     end
 
     local bufnr = vim.api.nvim_create_buf(false, true)
-    vim.api.nvim_buf_set_option(bufnr, "buftype", "nofile")
-    vim.api.nvim_buf_set_option(bufnr, "bufhidden", "hide")
-    vim.api.nvim_buf_set_option(bufnr, "swapfile", false)
-    vim.api.nvim_buf_set_option(bufnr, "modifiable", true)
+    vim.api.nvim_set_option_value("buftype", "nofile", { buf = bufnr })
+    vim.api.nvim_set_option_value("bufhidden", "hide", { buf = bufnr })
+    vim.api.nvim_set_option_value("swapfile", false, { buf = bufnr })
+    vim.api.nvim_set_option_value("modifiable", true, { buf = bufnr })
     vim.api.nvim_buf_set_keymap(bufnr, "n", "q", ":bd!<CR>", { noremap = true, silent = true })
 
     vim.cmd("split")
@@ -44,7 +44,7 @@ function M.ExecuteShellCommandInBuffer()
         stderr:close()
         handle:close()
         vim.schedule(function()
-            vim.api.nvim_buf_set_option(bufnr, "modifiable", false)
+            vim.api.nvim_set_option_value("modifiable", false, { buf = bufnr })
         end)
     end)
 
