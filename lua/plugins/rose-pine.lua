@@ -10,6 +10,9 @@ return {
                 italic = false,
                 transparency = false,
             },
+            highlight_groups = {
+                Comment = { italic = true },
+            },
         })
     end,
     init = function()
