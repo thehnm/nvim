@@ -105,6 +105,16 @@ local config = function()
         },
     })
 
+    -- bash
+    lspconfig.bashls.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+        filetypes = {
+            "sh",
+            "bash",
+        },
+    })
+
     local luacheck = require("efmls-configs.linters.luacheck")
     local stylua = require("efmls-configs.formatters.stylua")
     local flake8 = require("efmls-configs.linters.flake8")
@@ -113,6 +123,8 @@ local config = function()
     local prettierd = require("efmls-configs.formatters.prettier_d")
     local golangcilint = require("efmls-configs.linters.golangci_lint")
     local goimports = require("efmls-configs.formatters.goimports")
+    local shellcheck = require("efmls-configs.linters.shellcheck")
+    local beautysh = require("efmls-configs.formatters.beautysh")
 
     -- configure efm server
     lspconfig.efm.setup({
@@ -132,6 +144,7 @@ local config = function()
             "html",
             "go",
             "css",
+            "sh",
         },
         init_options = {
             documentFormatting = true,
@@ -157,6 +170,7 @@ local config = function()
                 html = { nil, prettierd },
                 go = { golangcilint, goimports },
                 css = { eslint_d, prettierd },
+                sh = { shellcheck, beautysh },
             },
         },
     })
