@@ -145,6 +145,7 @@ local config = function()
             "go",
             "css",
             "sh",
+            "yaml",
         },
         init_options = {
             documentFormatting = true,
@@ -171,6 +172,7 @@ local config = function()
                 go = { golangcilint, goimports },
                 css = { eslint_d, prettierd },
                 sh = { shellcheck, beautysh },
+                yaml = { nil, prettierd },
             },
         },
     })
