@@ -10,6 +10,6 @@ return {
         })
     end,
     keys = {
-        mapkeyret("<leader>nnp", "NoNeckPain", "Toggles the No Neck Pain plugin"),
+        mapkeyret("<leader>np", "NoNeckPain", "Toggles the No Neck Pain plugin"),
     },
 }
