@@ -35,3 +35,5 @@ vim.opt.fillchars:append({ vert = " " })
 vim.opt.title = true
 vim.opt.titlelen = 0 -- do not shorten title
 vim.opt.titlestring = 'nvim %{expand("%:p")}'
+
+vim.diagnostic.config({ virtual_text = true })
