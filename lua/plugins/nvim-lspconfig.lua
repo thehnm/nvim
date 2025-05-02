@@ -120,7 +120,14 @@ local config = function()
     local flake8 = require("efmls-configs.linters.flake8")
     local black = require("efmls-configs.formatters.black")
     local eslint_d = require("efmls-configs.linters.eslint_d")
+
     local prettierd = require("efmls-configs.formatters.prettier_d")
+    local fs = require("efmls-configs.fs")
+    prettierd.formatCommand = string.format(
+        "%s --stdin-filepath '${INPUT}' ${--range-start=charStart} ${--range-end=charEnd}",
+        fs.executable("prettierd", fs.Scope.NODE)
+    )
+
     local gofmt = require("efmls-configs.formatters.gofmt")
     local shellcheck = require("efmls-configs.linters.shellcheck")
     local beautysh = require("efmls-configs.formatters.beautysh")
