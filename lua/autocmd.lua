@@ -24,3 +24,23 @@ vim.api.nvim_create_autocmd("DiagnosticChanged", {
         vim.cmd("redrawstatus")
     end,
 })
+
+vim.api.nvim_create_augroup("FileTypeSpecificSettings", { clear = true })
+
+vim.api.nvim_create_autocmd("FileType", {
+    group = "FileTypeSpecificSettings",
+    pattern = "javascript,typescript,svelte,html,json",
+    command = "setlocal shiftwidth=2 expandtab",
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    group = "FileTypeSpecificSettings",
+    pattern = "python",
+    command = "setlocal shiftwidth=4 expandtab",
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    group = "FileTypeSpecificSettings",
+    pattern = "go",
+    command = "setlocal shiftwidth=4 noexpandtab",
+})
