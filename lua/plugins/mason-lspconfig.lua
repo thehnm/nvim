@@ -10,6 +10,7 @@ local opts = {
         "gopls",
     },
     automatic_installation = true,
+    automatic_enable = false,
 }
 
 return {
