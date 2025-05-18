@@ -196,6 +196,5 @@ return {
         "hrsh7th/cmp-buffer",
         "hrsh7th/cmp-nvim-lsp",
         "folke/trouble.nvim",
-        "filipdutescu/renamer.nvim",
     },
 }
