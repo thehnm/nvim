@@ -4,10 +4,9 @@ local config = function()
     require("neoconf").setup({})
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
     local capabilities = cmp_nvim_lsp.default_capabilities()
-    local lspconfig = require("lspconfig")
 
     -- lua
-    lspconfig.lua_ls.setup({
+    vim.lsp.config("lua_ls", {
         capabilities = capabilities,
         on_attach = on_attach,
         settings = {
@@ -26,14 +25,14 @@ local config = function()
     })
 
     -- json
-    lspconfig.jsonls.setup({
+    vim.lsp.config("jsonls", {
         capabilities = capabilities,
         on_attach = on_attach,
         filetypes = { "json", "jsonc" },
     })
 
     -- python
-    lspconfig.pyright.setup({
+    vim.lsp.config("pyright", {
         capabilities = capabilities,
         on_attach = on_attach,
         settings = {
@@ -50,7 +49,7 @@ local config = function()
     })
 
     -- typescript
-    lspconfig.ts_ls.setup({
+    vim.lsp.config("ts_ls", {
         on_attach = on_attach,
         capabilities = capabilities,
         filetypes = {
@@ -59,10 +58,9 @@ local config = function()
             "typescript",
             "typescriptreact",
         },
-        root_dir = lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git"),
     })
 
-    lspconfig.svelte.setup({
+    vim.lsp.config("svelte", {
         on_attach = on_attach,
         capabilities = capabilities,
         filetypes = {
@@ -71,7 +69,7 @@ local config = function()
     })
 
     -- html, javascriptreact, css, sass, scss, less, vue
-    lspconfig.emmet_ls.setup({
+    vim.lsp.config("emmet_ls", {
         capabilities = capabilities,
         on_attach = on_attach,
         filetypes = {
@@ -85,7 +83,7 @@ local config = function()
     })
 
     -- latex
-    lspconfig.texlab.setup({
+    vim.lsp.config("texlab", {
         capabilities = capabilities,
         on_attach = on_attach,
         filetypes = {
@@ -96,7 +94,7 @@ local config = function()
     })
 
     -- go
-    lspconfig.gopls.setup({
+    vim.lsp.config("gopls", {
         capabilities = capabilities,
         on_attach = on_attach,
         filetypes = {
@@ -106,7 +104,7 @@ local config = function()
     })
 
     -- bash
-    lspconfig.bashls.setup({
+    vim.lsp.config("bashls", {
         capabilities = capabilities,
         on_attach = on_attach,
         filetypes = {
@@ -115,11 +113,22 @@ local config = function()
         },
     })
 
+    -- c/c++
+    vim.lsp.config("clangd", {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        filetypes = {
+            "c",
+            "cpp",
+        },
+    })
+
     local luacheck = require("efmls-configs.linters.luacheck")
     local stylua = require("efmls-configs.formatters.stylua")
     local flake8 = require("efmls-configs.linters.flake8")
     local black = require("efmls-configs.formatters.black")
     local eslint_d = require("efmls-configs.linters.eslint_d")
+    local cpplint = require("efmls-configs.linters.cpplint")
 
     local prettierd = require("efmls-configs.formatters.prettier_d")
     local fs = require("efmls-configs.fs")
@@ -131,9 +140,12 @@ local config = function()
     local gofmt = require("efmls-configs.formatters.gofmt")
     local shellcheck = require("efmls-configs.linters.shellcheck")
     local beautysh = require("efmls-configs.formatters.beautysh")
+    local sqlfluff = require("efmls-configs.linters.sqlfluff")
+    local sql_formatter = require("efmls-configs.formatters.sql-formatter")
+    local clang_format = require("efmls-configs.formatters.clang_format")
 
     -- configure efm server
-    lspconfig.efm.setup({
+    vim.lsp.config("efm", {
         filetypes = {
             "lua",
             "python",
@@ -152,6 +164,9 @@ local config = function()
             "css",
             "sh",
             "yaml",
+            "sql",
+            "c",
+            "cpp",
         },
         init_options = {
             documentFormatting = true,
@@ -179,6 +194,9 @@ local config = function()
                 css = { eslint_d, prettierd },
                 sh = { shellcheck, beautysh },
                 yaml = { nil, prettierd },
+                sql = { sqlfluff, sql_formatter },
+                c = { cpplint, clang_format },
+                cpp = { cpplint, clang_format },
             },
         },
     })
