@@ -23,6 +23,7 @@ local config = function()
             },
         },
     })
+    vim.lsp.enable("lua_ls")
 
     -- json
     vim.lsp.config("jsonls", {
@@ -30,6 +31,7 @@ local config = function()
         on_attach = on_attach,
         filetypes = { "json", "jsonc" },
     })
+    vim.lsp.enable("jsonls")
 
     -- python
     vim.lsp.config("pyright", {
@@ -47,6 +49,7 @@ local config = function()
             },
         },
     })
+    vim.lsp.enable("pyright")
 
     -- typescript
     vim.lsp.config("ts_ls", {
@@ -59,6 +62,7 @@ local config = function()
             "typescriptreact",
         },
     })
+    vim.lsp.enable("ts_ls")
 
     vim.lsp.config("svelte", {
         on_attach = on_attach,
@@ -67,6 +71,7 @@ local config = function()
             "svelte",
         },
     })
+    vim.lsp.enable("svelte")
 
     -- html, javascriptreact, css, sass, scss, less, vue
     vim.lsp.config("emmet_ls", {
@@ -81,6 +86,7 @@ local config = function()
             "vue",
         },
     })
+    vim.lsp.enable("emmet_ls")
 
     -- latex
     vim.lsp.config("texlab", {
@@ -92,6 +98,7 @@ local config = function()
             "bib",
         },
     })
+    vim.lsp.enable("texlab")
 
     -- go
     vim.lsp.config("gopls", {
@@ -102,6 +109,7 @@ local config = function()
             "gomod",
         },
     })
+    vim.lsp.enable("gopls")
 
     -- bash
     vim.lsp.config("bashls", {
@@ -112,6 +120,7 @@ local config = function()
             "bash",
         },
     })
+    vim.lsp.enable("bashls")
 
     -- c/c++
     vim.lsp.config("clangd", {
@@ -122,6 +131,7 @@ local config = function()
             "cpp",
         },
     })
+    vim.lsp.enable("clangd")
 
     local luacheck = require("efmls-configs.linters.luacheck")
     local stylua = require("efmls-configs.formatters.stylua")
@@ -200,6 +210,7 @@ local config = function()
             },
         },
     })
+    vim.lsp.enable("efm")
 end
 
 return {
