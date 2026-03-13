@@ -4,13 +4,13 @@ endif
 
 " ── Completed tasks ───────────────────────────────────────────────────────────
 syn match todoCompleted       "^x .*$"
-      \ contains=todoCompletedMarker,todoCompletionDate,todoTag,todoDue,todoNote
+      \ contains=todoCompletedMarker,todoCompletionDate,todoTag,todoDue,todoNote,todoComment
 syn match todoCompletedMarker "^x"                    contained
 syn match todoCompletionDate  "\d\{4}-\d\{2}-\d\{2}" contained
 
 " ── Backlog tasks ─────────────────────────────────────────────────────────────
 syn match todoBacklog         "^b .*$"
-      \ contains=todoBacklogMarker,todoTag,todoDue,todoNote
+      \ contains=todoBacklogMarker,todoTag,todoDue,todoNote,todoComment
 syn match todoBacklogMarker   "^b"                    contained
 
 " ── Active task priorities (A–F only, at start of line) ──────────────────────
@@ -22,9 +22,11 @@ syn match todoPriorityE "^(E)"
 syn match todoPriorityF "^(F)"
 
 " ── Inline elements ───────────────────────────────────────────────────────────
-syn match todoTag  "#\w\+"
-syn match todoDue  "due:\d\{4}-\d\{2}-\d\{2}"
-syn match todoNote "n:\S\+"
+syn match todoTag     "#\w\+"
+syn match todoDue     "due:\d\{4}-\d\{2}-\d\{2}"
+syn match todoNote    "n:\S\+"
+syn match todoComment 'c:"[^"]*"'
+syn match todoComment "c:'[^']*'"
 
 " ── Link to standard groups (theme-agnostic) ──────────────────────────────────
 hi def link todoCompleted       Comment
@@ -41,5 +43,6 @@ hi def link todoPriorityF       NonText
 hi def link todoTag             Type
 hi def link todoDue             WarningMsg
 hi def link todoNote            String
+hi def link todoComment         Comment
 
 let b:current_syntax = "todo"
